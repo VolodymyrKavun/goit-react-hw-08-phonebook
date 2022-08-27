@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Header from 'components/Header';
 import Home from 'pages/Home';
 import Contacts from 'pages/Contacts';
+import Register from 'pages/Register';
+import Login from 'pages/Login';
+import PrivateRoutes from 'components/PrivateRoutes/PrivateRoutes';
 
 const App = () => {
   return (
@@ -10,8 +13,12 @@ const App = () => {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<PrivateRoutes />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/contacts" element={<Contacts />} />
+        </Route>
       </Routes>
     </>
   );

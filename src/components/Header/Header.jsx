@@ -5,8 +5,10 @@ const Header = () => {
     <>
       <NavBar>
         <HeaderWrapper>
-          <NavLinkStyled to="/">Add contact</NavLinkStyled>
+          <NavLinkStyled to="/home">Add contact</NavLinkStyled>
           <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>
+          <NavLinkStyled to="/login">Login</NavLinkStyled>
+          <NavLinkStyled to="/register">Register</NavLinkStyled>
         </HeaderWrapper>
       </NavBar>
     </>
