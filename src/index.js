@@ -9,7 +9,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <React.StrictMode>
-      <BrowserRouter basename="/goit-react-hw-07-phonebook/">
+      <BrowserRouter basename="/goit-react-hw-08-phonebook/">
         <App />
       </BrowserRouter>
     </React.StrictMode>
