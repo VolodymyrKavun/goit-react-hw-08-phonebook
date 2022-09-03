@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { authApi } from './Query/UserApi';
-import { showSuccess } from 'utils/Toast/toastMessage';
 
 const initialState = {
   name: '',

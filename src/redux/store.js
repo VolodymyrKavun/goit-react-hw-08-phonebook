@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import filterReducer from './filterSlice';
-import contactsReducer from './contactsSlice';
+// import contactsReducer from './contactsSlice';
 // import { contactApi } from './Query/contactAPI';
 import { authApi } from './Query/UserApi';
 import userReduser from './userSlice';
