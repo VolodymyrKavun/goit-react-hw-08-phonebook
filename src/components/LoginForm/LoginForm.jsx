@@ -4,8 +4,8 @@ import { useLoginAuthMutation } from 'redux/Query/UserApi';
 import { Form, Input, Button } from 'components/ContactForm/ContactForm.styled';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('aaaaa123@gmail.com');
-  const [password, setPassword] = useState('aaaaa123aaaaa123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // РТК Query логінізація
   const [loginAuth, result] = useLoginAuthMutation();

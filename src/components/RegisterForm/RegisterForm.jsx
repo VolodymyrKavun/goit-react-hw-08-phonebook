@@ -5,9 +5,9 @@ import { Form, Input, Button } from 'components/ContactForm/ContactForm.styled';
 import { showSuccess } from 'utils/Toast/toastMessage';
 
 const RegisterForm = () => {
-  const [name, setName] = useState('aaaaa123');
-  const [email, setEmail] = useState('aaaaa123@gmail.com');
-  const [password, setPassword] = useState('aaaaa123aaaaa123');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // RTK Query , коли створюємо нового користувача
   const [createAuth, result] = useCreateAuthMutation();
