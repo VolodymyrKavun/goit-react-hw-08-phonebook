@@ -1,21 +1,14 @@
 import React from 'react';
-import { useCreateAuthMutation } from 'redux/Query/UserApi';
 import { useState } from 'react';
+import { useLoginAuthMutation } from 'redux/Query/UserApi';
 import { Form, Input, Button } from 'components/ContactForm/ContactForm.styled';
-import { showSuccess } from 'utils/Toast/toastMessage';
 
-const RegisterForm = () => {
-  const [name, setName] = useState('aaaaa123');
+const LoginForm = () => {
   const [email, setEmail] = useState('aaaaa123@gmail.com');
   const [password, setPassword] = useState('aaaaa123aaaaa123');
 
-  // RTK Query , коли створюємо нового користувача
-  const [createAuth, result] = useCreateAuthMutation();
-  console.log('🚀 ~ result', result);
-
-  if (result.isSuccess) {
-    showSuccess('Successful registration');
-  }
+  // РТК Query логінізація
+  const [loginAuth, result] = useLoginAuthMutation();
 
   // зміна значення інпута
   const handleInputChange = event => {
@@ -24,9 +17,6 @@ const RegisterForm = () => {
     switch (name) {
       case 'email':
         setEmail(value);
-        break;
-      case 'name':
-        setName(value);
         break;
       case 'password':
         setPassword(value);
@@ -40,19 +30,16 @@ const RegisterForm = () => {
     e.preventDefault();
     // Значення полів "Інпуту"
     const user = {
-      name,
       email,
       password,
     };
 
-    createAuth(user);
-
+    loginAuth(user);
     reset();
   };
 
   // очищення інпута
   const reset = () => {
-    setName('');
     setEmail('');
     setPassword('');
   };
@@ -60,13 +47,6 @@ const RegisterForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleInputChange}
-          required
-        />
         <Input
           type="text"
           name="email"
@@ -82,11 +62,11 @@ const RegisterForm = () => {
           required
         />
         <Button type="submit" disabled={result.isLoading}>
-          {result.isLoading ? 'Loading...' : 'Register'}
+          {result.isLoading ? 'Loading...' : 'Login'}
         </Button>
       </Form>
     </>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

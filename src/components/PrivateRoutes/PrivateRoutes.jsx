@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
+import { getUser } from 'redux/contactSelectors';
 
 const PrivateRoutes = () => {
-  const { token = false } = useSelector(state => state);
+  // Перевірка на "Токен"
+  const { token } = useSelector(getUser);
 
   return token ? <Outlet /> : <Navigate to="/login" replace />;
 };

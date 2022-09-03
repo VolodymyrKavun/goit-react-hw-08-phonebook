@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Label, Input, Container } from './Filter.styled';
-import { filterItems } from '../../redux/contactSlice';
+import { filterItems } from '../../redux/filterSlice';
 import { useDispatch } from 'react-redux';
 
 const Filter = () => {

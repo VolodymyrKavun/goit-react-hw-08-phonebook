@@ -1,25 +1,44 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from 'components/Header';
-import Home from 'pages/Home';
-import Contacts from 'pages/Contacts';
-import Register from 'pages/Register';
-import Login from 'pages/Login';
 import PrivateRoutes from 'components/PrivateRoutes/PrivateRoutes';
+import { useCurrentAuthQuery } from 'redux/Query/UserApi';
+import { useSelector } from 'react-redux';
+import { getUser } from 'redux/contactSelectors';
+import Loader from 'utils/Loader';
+
+const Home = lazy(() => import('pages/Home'));
+const Contacts = lazy(() => import('pages/Contacts'));
+const Register = lazy(() => import('pages/Register'));
+const Login = lazy(() => import('pages/Login'));
+const UserMenu = lazy(() => import('components/UserMenu'));
 
 const App = () => {
+  const { token } = useSelector(getUser);
+
+  useCurrentAuthQuery(undefined, {
+    skip: !token,
+  });
+
   return (
     <>
       <Header />
 
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<PrivateRoutes />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/contacts" element={<Contacts />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<PrivateRoutes />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/userMenu" element={<UserMenu />} />
+          </Route>
+        </Routes>
+        <ToastContainer />
+      </Suspense>
     </>
   );
 };

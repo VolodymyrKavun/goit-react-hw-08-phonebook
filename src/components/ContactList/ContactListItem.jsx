@@ -1,16 +1,20 @@
 import { Item, Button } from './ContactList.styled';
-import { useDeleteContactsMutation } from 'redux/contactsQuery/contactAPI';
+// import { useDeleteContactsMutation } from 'redux/Query/contactAPI';
+import { useDeleteContactsMutation } from 'redux/Query/UserApi';
+import { showInfo } from 'utils/Toast/toastMessage';
 
 const ContactListItem = ({ id, name, number }) => {
   // РТК Query (логіка кнопки видалення)
-  const [deleteContact, { isLoading: isDeleting }] =
-    useDeleteContactsMutation();
+  const [deleteContact, results] = useDeleteContactsMutation();
 
+  if (results.isSuccess) {
+    showInfo('Successful removal');
+  }
   return (
     <Item>
       {name}: {number}
-      <Button onClick={() => deleteContact(id)} disabled={isDeleting}>
-        {isDeleting ? 'Deleting...' : 'Delete'}
+      <Button onClick={() => deleteContact(id)} disabled={results.isLoading}>
+        {results.isLoading ? 'Deleting...' : 'Delete'}
       </Button>
     </Item>
   );

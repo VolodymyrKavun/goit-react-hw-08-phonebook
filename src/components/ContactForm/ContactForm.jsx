@@ -1,22 +1,26 @@
 import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
-import { nanoid } from 'nanoid';
-import { Form, Input, Button, Label } from './ContactForm.styled';
-import { showWarning, showSuccess } from 'utils/Toast/toastMessage';
+// import { nanoid } from 'nanoid';
+import { Form, Input, Button } from './ContactForm.styled';
+import { showError, showSuccess } from 'utils/Toast/toastMessage';
+import // useCreateContactMutation,
+// useFetchContactsQuery,
+'redux/Query/contactAPI';
+
 import {
-  useCreateContactMutation,
-  useFetchContactsQuery,
-} from 'redux/contactsQuery/contactAPI';
+  useCreateContactsMutation,
+  useGetContacsQuery,
+} from 'redux/Query/UserApi';
 
 const ContactForm = () => {
-  // Щоб перекидувало на іншу сторінку
+  // Хук, щоб перекидувало на іншу сторінку
   // const navigate = useNavigate();
 
   // РТК Query (створення нового контакту)
-  const [createContact, { isLoading }] = useCreateContactMutation();
+  const [createContact, { isLoading }] = useCreateContactsMutation();
 
   //  РТК Query (отримання даниз з "беку")
-  const { data } = useFetchContactsQuery();
+  const { data } = useGetContacsQuery();
 
   // Значення полів "Інпуту"
   const [name, setName] = useState('');
@@ -39,22 +43,22 @@ const ContactForm = () => {
   };
 
   // створення унікального "id"
-  const nameInputId = nanoid();
-  const numberInputId = nanoid();
+  // const nameInputId = nanoid();
+  // const numberInputId = nanoid();
 
   // Сабмітить форму та відправляє дані для створення нового контакту
   const handleSubmit = e => {
     e.preventDefault();
     // Значення полів "Інпуту"
     const contact = {
-      id: nanoid(),
+      // id: nanoid(),
       name,
       number,
     };
     //  Перевірка на ім'я, щоб не було однакових
     const contactsName = data.some(el => contact.name === el.name);
     if (contactsName) {
-      showWarning(`${contact.name} is already in contacts.`);
+      showError(`${contact.name} is already in contacts.`);
     } else {
       createContact(contact);
       showSuccess(`${contact.name} is add.`);
@@ -72,7 +76,7 @@ const ContactForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Label htmlFor={nameInputId}>Name</Label>
+        {/* <Label htmlFor={nameInputId}>Name</Label> */}
         <Input
           type="text"
           name="name"
@@ -80,11 +84,11 @@ const ContactForm = () => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           value={name}
           onChange={handleInputChange}
-          id={nameInputId}
+          // id={nameInputId}
           required
         />
 
-        <Label htmlFor={numberInputId}>Number</Label>
+        {/* <Label htmlFor={numberInputId}>Number</Label> */}
         <Input
           type="tel"
           name="number"
@@ -92,7 +96,7 @@ const ContactForm = () => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           value={number}
           onChange={handleInputChange}
-          id={numberInputId}
+          // id={numberInputId}
           required
         />
         <Button type="submit" disabled={isLoading}>
