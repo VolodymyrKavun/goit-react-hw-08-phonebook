@@ -29,6 +29,15 @@ export const userSlice = createSlice({
       }
     );
 
+    // todo
+    // userLoginAuth робота з логіном (якщо помилка)
+    builder.addMatcher(
+      authApi.endpoints.loginAuth.matchRejected,
+      (state, { payload }) => {
+        showWarning('User is not found');
+      }
+    );
+
     // userCreateAuth робота створення нового кристувача, (якщо успішно)
     builder.addMatcher(
       authApi.endpoints.createAuth.matchFulfilled,
