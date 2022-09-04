@@ -63,7 +63,7 @@ export const userSlice = createSlice({
       (state, { payload }) => {
         state.email = payload.email;
         state.name = payload.name;
-        showSuccess('Login success');
+        showSuccess('Successful login');
       }
     );
     // userError робота, коли помилка при отриманні Токену
