@@ -46,7 +46,6 @@ const RegisterForm = () => {
     };
 
     createAuth(user);
-
     reset();
   };
 

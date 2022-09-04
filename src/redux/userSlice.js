@@ -29,6 +29,17 @@ export const userSlice = createSlice({
       }
     );
 
+    // userCreateAuth робота створення нового кристувача, (якщо успішно)
+    builder.addMatcher(
+      authApi.endpoints.createAuth.matchFulfilled,
+      (state, { payload }) => {
+        const { user, token } = payload;
+        state.email = user.email;
+        state.name = user.name;
+        state.token = token;
+      }
+    );
+
     // userCreateAuth робота створення нового кристувача, (якщо помилка)
     builder.addMatcher(
       authApi.endpoints.createAuth.matchRejected,

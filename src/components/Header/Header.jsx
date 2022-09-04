@@ -11,18 +11,16 @@ const Header = () => {
       <NavBar>
         <HeaderWrapper>
           {token ? (
-            <NavLinkStyled to="/userMenu">UserMenu</NavLinkStyled>
-          ) : (
-            <NavLinkStyled to="/login">Login</NavLinkStyled>
-          )}
-
-          {token ? (
             <>
+              <NavLinkStyled to="/userMenu">UserMenu</NavLinkStyled>
               <NavLinkStyled to="/home">Add contact</NavLinkStyled>
               <NavLinkStyled to="/contacts">Contacts</NavLinkStyled>
             </>
           ) : (
-            <NavLinkStyled to="/register">Register</NavLinkStyled>
+            <>
+              <NavLinkStyled to="/login">Login</NavLinkStyled>
+              <NavLinkStyled to="/register">Register</NavLinkStyled>
+            </>
           )}
         </HeaderWrapper>
       </NavBar>
